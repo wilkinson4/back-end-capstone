@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Routes.V1;
+using System.Linq;
 
 namespace Capstone.Controllers.V1
 {
@@ -13,9 +14,12 @@ namespace Capstone.Controllers.V1
         }
 
         [HttpGet(Api.Values.GetAll)]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string _filter)
         {
             var values = new[] { "value 1", "value 2", "value 3" };
+            if(_filter != null){
+                values = values.Where(v => v.Contains(_filter)).ToArray();
+            }
             return Ok(values);
         }
 
