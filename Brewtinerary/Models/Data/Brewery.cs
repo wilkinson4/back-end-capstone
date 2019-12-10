@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -42,5 +43,9 @@ namespace Capstone.Models.Data
         [Required]
         [Url]
         public string WebsiteURL { get; set; }
+
+        public ICollection<Beer> Beers { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace Capstone.Models.Data
 
         [Required]
         public int BreweryId { get; set; }
+
+        public Brewery Brewery { get; set; }
     }
 }

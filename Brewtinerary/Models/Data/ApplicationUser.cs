@@ -13,6 +13,11 @@ namespace Capstone.Models.Data
     public class ApplicationUser : IdentityUser
     {
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
+        public Itinerary Itinerary { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

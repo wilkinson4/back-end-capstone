@@ -12,7 +12,6 @@ namespace Capstone.Models.Data
 
         public string UserId { get; set; }
 
-        [NotMapped]
         public ApplicationUser User { get; set; }
 
         [Required]
@@ -23,7 +22,10 @@ namespace Capstone.Models.Data
         public string Name { get; set; }
 
         [Required]
-        public string Location { get; set; }
+        public string City { get; set; }
+
+        [Required]
+        public string State { get; set; }
 
         public virtual ICollection<ItineraryBrewery> ItineraryBreweries { get; set; }
     }
