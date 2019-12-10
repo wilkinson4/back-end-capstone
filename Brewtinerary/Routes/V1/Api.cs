@@ -23,5 +23,11 @@ namespace Capstone.Routes.V1
             public const string Register = Base + "/Auth/Register";
             public const string Refresh = Base + "/Auth/Refresh";
         }
+
+        public static class Itineraries
+        {
+            public const string GetAll = Base + "/Itineraries";
+            public const string Get = Base + "/Itineraries/{id}";
+        }
     }
 }
