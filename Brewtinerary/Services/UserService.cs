@@ -82,7 +82,6 @@ namespace Capstone.Services
                 UserName = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                StreetAddress = user.StreetAddress
             };
 
             var createdUser = await _userManager.CreateAsync(newUser, user.Password);
