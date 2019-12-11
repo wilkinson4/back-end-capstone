@@ -30,6 +30,7 @@ class Home extends Component {
   }
 
   handleInputChange = (event) => {
+    console.log("Handle input change function");
     const { name, value } = event.target;
     this.setState({
       [name]: value,
@@ -40,15 +41,15 @@ class Home extends Component {
     return (
       <>
         <h1>My Itineraries</h1>
-        <table class="itineraries__table">
+        <table className="itineraries__table">
           <thead>
-            <tr class="itinerary__tableRow">
+            <tr className="itinerary__tableRow">
               <th>Name</th>
               <th>Date</th>
               <th>Location</th>
             </tr>
           </thead>
-          <tbody class="itinerary__tableBody">
+          <tbody className="itinerary__tableBody">
             <tr>
               {
                 this.state.itineraries.map(itinerary => <td>{itinerary.name}</td>)

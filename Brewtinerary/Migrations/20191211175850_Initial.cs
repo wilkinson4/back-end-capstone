@@ -55,15 +55,15 @@ namespace Capstone.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Type = table.Column<string>(nullable: true),
+                    Brewery_Type = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: false),
-                    Zip = table.Column<string>(nullable: false),
+                    Postal_Code = table.Column<string>(nullable: false),
                     Longitude = table.Column<string>(nullable: false),
                     Latitude = table.Column<string>(nullable: false),
                     Phone = table.Column<string>(nullable: false),
-                    WebsiteURL = table.Column<string>(nullable: false)
+                    Website_URL = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -289,13 +289,13 @@ namespace Capstone.Migrations
                         column: x => x.BreweryId,
                         principalTable: "Breweries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reviews_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -406,12 +406,12 @@ namespace Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "6bb316e2-172f-4c88-bd53-b77ac88431fe", "andy@andy.com", true, "Andy", "Collins", false, null, "ANDY@ANDY.COM", "ANDY123", "AQAAAAEAACcQAAAAEIxYWt43TacBSCMO6/2Ovzepdh7OirglkJmWcbdmSMy7FrTBLKkIlM4fneUzqPpc6Q==", "610-123-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "andy123" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "d9edec8d-5bac-4e48-83a5-8c3e5da070a2", "andy@andy.com", true, "Andy", "Collins", false, null, "ANDY@ANDY.COM", "ANDY123", "AQAAAAEAACcQAAAAELNU/rqnMF6vC+0EBEwoKkm9Xtj16THYbAAT27Yvng+sh0BhV5FlMPl1H2wsblQXKA==", "610-123-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "andy123" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-fffffffff123", 0, "9f1a890a-1d46-4660-b6aa-62d7719864d6", "jenny@jenny.com", true, "Jenny", "Wilkinson", false, null, "JENNY@JENNY.COM", "JENNY123", "AQAAAAEAACcQAAAAEE9/0AWqT7sqGs3ot8eZL8LAV1eSdPaPy43hU53KW8GJwgC05xbTZRpTi2uKqIAyng==", "610-989-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794123", false, "jenny123" });
+                values: new object[] { "00000000-ffff-ffff-ffff-fffffffff123", 0, "3645bb8c-d700-4efc-9140-eab5bc5c70af", "jenny@jenny.com", true, "Jenny", "Wilkinson", false, null, "JENNY@JENNY.COM", "JENNY123", "AQAAAAEAACcQAAAAEIJkQXSGKeM5k43ZFPvGaSaeflmYpkVXGZLQ7rJdK2/WdGnhLpEuo7sMJT+iYBaaeg==", "610-989-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794123", false, "jenny123" });
 
             migrationBuilder.InsertData(
                 table: "Itineraries",
