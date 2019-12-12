@@ -19,6 +19,7 @@ namespace Capstone.Models.Data
         [Required]
         public string Street { get; set; }
 
+        [Required]
         public string City { get; set; }
 
         [Required]

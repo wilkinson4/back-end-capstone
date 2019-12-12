@@ -37,5 +37,23 @@ namespace Capstone.Controllers.V1
             //        <IEnumerable<Brewery>>(responseStream);
             return breweriesAsJSON;
         }
+
+        [HttpPost(Api.Breweries.Post)]
+        public async Task<IActionResult> AddBrewery([FromRoute]int itineraryId, [FromBody] Brewery brewery)
+        {
+            _context.Breweries.Add(brewery);
+            var breweryId = await _context.SaveChangesAsync();
+
+            var itineraryBrewery = new ItineraryBrewery()
+            {
+                ItineraryId = itineraryId,
+                BreweryId = breweryId
+            };
+
+            _context.ItineraryBreweries.Add(itineraryBrewery);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }

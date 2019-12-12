@@ -34,6 +34,7 @@ namespace Capstone.Routes.V1
         {
             public const string GetAll = Base + "/Breweries";
             public const string Get = Base + "/Breweries/{id}";
+            public const string Post = Base + "/Breweries/Create/{itineraryId}";
         }
     }
 }

@@ -5,13 +5,17 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import BreweryList from './components/BreweryList';
+import AddBrewery from './components/AddBrewery';
+import { createAuthHeaders } from './API/userManager';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 
 class App extends Component {
   state = {
     user: getUser(),
-    brewerySearchText: ""
+    brewerySearchText: "",
+    itineraries: [],
+    currentBrewery: {}
   }
 
   logout = () => {
@@ -23,6 +27,17 @@ class App extends Component {
     this.setState({
       [stateProperty]: stateValue
     })
+  }
+
+  componentDidMount() {
+    const authHeader = createAuthHeaders();
+    fetch('/api/v1/itineraries', {
+      headers: authHeader
+    })
+      .then(response => response.json())
+      .then(itineraries => {
+        this.setState({itineraries: itineraries });
+      });
   }
 
   render() {
@@ -43,7 +58,7 @@ class App extends Component {
           )} />
           <Route exact path="/" render={() => {
             return this.state.user ? (
-              <Home />
+              <Home {...this.props} itineraries={this.state.itineraries} stateHandler={this.stateHandler} />
             ) : <Redirect to="/login" />
           }} />
 
@@ -51,10 +66,21 @@ class App extends Component {
             return this.state.user ? (
               <BreweryList
                 {...this.props}
+                stateHandler={this.stateHandler}
                 brewerySearchText={this.state.brewerySearchText}
               />
             ) : <Redirect to="/login" />
           }} />
+          <Route path="/breweries/add" render={() => {
+            return this.state.user ? (
+              <AddBrewery
+                {...this.props}
+                currentBrewery={this.state.currentBrewery}
+                itineraries={this.state.itineraries}
+              />
+            ) : <Redirect to="/login" />
+          }}
+          />
         </Router>
       </div>
     );
