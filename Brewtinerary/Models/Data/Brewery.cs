@@ -14,7 +14,7 @@ namespace Capstone.Models.Data
         [MinLength(2)]
         public string Name { get; set; }
 
-        public string Type { get; set; }
+        public string Brewery_Type { get; set; }
 
         [Required]
         public string Street { get; set; }
@@ -25,10 +25,10 @@ namespace Capstone.Models.Data
         public string State { get; set; }
 
         [Required]
-        public string Zip { get; set; }
+        public string Postal_Code { get; set; }
 
         [NotMapped]
-        public string FullAddress => $"{Street}, {City}, {State}, {Zip}";
+        public string FullAddress => $"{Street}, {City}, {State}, {Postal_Code}";
 
         [Required]
         public string Longitude { get; set; }
@@ -42,7 +42,7 @@ namespace Capstone.Models.Data
 
         [Required]
         [Url]
-        public string WebsiteURL { get; set; }
+        public string Website_URL { get; set; }
 
         public ICollection<Beer> Beers { get; set; }
 

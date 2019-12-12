@@ -103,6 +103,12 @@ namespace Capstone
                     }
                 });
             });
+            services.AddHttpClient("openBreweryDb", c =>
+            {
+                c.BaseAddress = new Uri("https://api.openbrewerydb.org/breweries/");
+                // Github API versioning
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createAuthHeaders } from '../API/userManager';
+import "./css/Home.css"
 
 class Home extends Component {
   state = {
@@ -29,6 +30,7 @@ class Home extends Component {
   }
 
   handleInputChange = (event) => {
+    console.log("Handle input change function");
     const { name, value } = event.target;
     this.setState({
       [name]: value,
@@ -38,12 +40,33 @@ class Home extends Component {
   render() {
     return (
       <>
-        <h1>Welcome to my app</h1>
-        <ul>
-          {
-            this.state.itineraries.map(itinerary => <li>{itinerary.name}</li>)
-          }
-        </ul>
+        <h1>My Itineraries</h1>
+        <table className="itineraries__table">
+          <thead>
+            <tr className="itinerary__tableRow">
+              <th>Name</th>
+              <th>Date</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody className="itinerary__tableBody">
+            <tr>
+              {
+                this.state.itineraries.map(itinerary => <td>{itinerary.name}</td>)
+              }
+            </tr>
+            <tr>
+              {
+                this.state.itineraries.map(itinerary => <td>{itinerary.dateOfEvent}</td>)
+              }
+            </tr>
+            <tr>
+              {
+                this.state.itineraries.map(itinerary => <td>{`${itinerary.city}, ${itinerary.state}`}</td>)
+              }
+            </tr>
+          </tbody>
+        </table>
         <input onChange={this.handleInputChange} id="textToFilterBy" name="textToFilterBy" type="text" placeholder="Filter the itineraries" />
         <button onClick={this.filterValues}>Submit</button>
       </>

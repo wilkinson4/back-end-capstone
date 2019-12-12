@@ -16,6 +16,7 @@ namespace Capstone.Models.Data
 
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public DateTime DateOfEvent { get; set; }
 
         [Required]

@@ -29,5 +29,11 @@ namespace Capstone.Routes.V1
             public const string GetAll = Base + "/Itineraries";
             public const string Get = Base + "/Itineraries/{id}";
         }
+
+        public static class Breweries
+        {
+            public const string GetAll = Base + "/Breweries";
+            public const string Get = Base + "/Breweries/{id}";
+        }
     }
 }

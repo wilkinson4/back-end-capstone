@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191210193041_Initial")]
+    [Migration("20191211175850_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,7 +117,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6bb316e2-172f-4c88-bd53-b77ac88431fe",
+                            ConcurrencyStamp = "d9edec8d-5bac-4e48-83a5-8c3e5da070a2",
                             Email = "andy@andy.com",
                             EmailConfirmed = true,
                             FirstName = "Andy",
@@ -125,7 +125,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANDY@ANDY.COM",
                             NormalizedUserName = "ANDY123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIxYWt43TacBSCMO6/2Ovzepdh7OirglkJmWcbdmSMy7FrTBLKkIlM4fneUzqPpc6Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELNU/rqnMF6vC+0EBEwoKkm9Xtj16THYbAAT27Yvng+sh0BhV5FlMPl1H2wsblQXKA==",
                             PhoneNumber = "610-123-4567",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
@@ -136,7 +136,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-fffffffff123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9f1a890a-1d46-4660-b6aa-62d7719864d6",
+                            ConcurrencyStamp = "3645bb8c-d700-4efc-9140-eab5bc5c70af",
                             Email = "jenny@jenny.com",
                             EmailConfirmed = true,
                             FirstName = "Jenny",
@@ -144,7 +144,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JENNY@JENNY.COM",
                             NormalizedUserName = "JENNY123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE9/0AWqT7sqGs3ot8eZL8LAV1eSdPaPy43hU53KW8GJwgC05xbTZRpTi2uKqIAyng==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIJkQXSGKeM5k43ZFPvGaSaeflmYpkVXGZLQ7rJdK2/WdGnhLpEuo7sMJT+iYBaaeg==",
                             PhoneNumber = "610-989-4567",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794123",
@@ -188,6 +188,9 @@ namespace Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Brewery_Type")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
@@ -207,6 +210,10 @@ namespace Capstone.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Postal_Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -215,14 +222,7 @@ namespace Capstone.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Zip")
+                    b.Property<string>("Website_URL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
