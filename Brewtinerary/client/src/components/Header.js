@@ -28,7 +28,7 @@ function Header(props) {
               </li>
               <li className="brewerySearch__li">
                 <Link className="brewerySearch__link" to="/breweries" onClick={() => props.stateHandler("brewerySearchText", searchText)}>
-                  Submit
+                  Search
                 </Link>
               </li>
               <li className="nav-item">Hello {props.user.username}</li>
