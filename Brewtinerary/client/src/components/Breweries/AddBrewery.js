@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
-import './css/AddBrewery.css'
-import BreweryManager from '../API/breweryManager';
+import '../css/AddBrewery.css'
+import BreweryManager from '../../API/breweryManager';
 
 
 function AddBrewery(props) {

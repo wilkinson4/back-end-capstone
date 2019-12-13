@@ -4,8 +4,8 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import BreweryList from './components/BreweryList';
-import AddBrewery from './components/AddBrewery';
+import BreweryList from './components/Breweries/BreweryList';
+import AddBrewery from './components/Breweries/AddBrewery';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 

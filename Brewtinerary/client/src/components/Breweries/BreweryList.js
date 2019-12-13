@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BreweryCard from './BreweryCard.js';
-import BreweryManager from '../API/breweryManager';
+import BreweryManager from '../../API/breweryManager';
 
 
 function BreweryList(props) {
