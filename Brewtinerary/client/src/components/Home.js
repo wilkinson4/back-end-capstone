@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ItineraryManager from '../API/itineraryManager';
 import "./css/Home.css";
 
 class Home extends Component {
@@ -13,6 +14,11 @@ class Home extends Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  componentDidMount() {
+    ItineraryManager.getAllItineraries()
+    .then(itineraries => this.props.stateHandler("itineraries", itineraries))
   }
 
   render() {

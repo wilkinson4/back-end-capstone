@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-
-namespace Capstone.Models.Data
+namespace Capstone.Models.ViewModels
 {
-    public class Brewery
+    public class BreweryCreateViewModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [MinLength(2)]
         public string Name { get; set; }
@@ -28,9 +26,6 @@ namespace Capstone.Models.Data
         [Required]
         public string Postal_Code { get; set; }
 
-        [NotMapped]
-        public string FullAddress => $"{Street}, {City}, {State}, {Postal_Code}";
-
         public string? Longitude { get; set; }
 
         public string? Latitude { get; set; }
@@ -42,9 +37,5 @@ namespace Capstone.Models.Data
         [Required]
         [Url]
         public string Website_URL { get; set; }
-
-        public ICollection<Beer> Beers { get; set; }
-
-        public ICollection<Review> Reviews { get; set; }
     }
 }

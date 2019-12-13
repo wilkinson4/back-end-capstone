@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models.Data;
 using Capstone.Models;
+using System;
 
 namespace Capstone.Data
 {
@@ -25,21 +26,17 @@ namespace Capstone.Data
         public DbSet<ItineraryBrewery> ItineraryBreweries { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
-        
+
         public DbSet<Comment> Comments { get; set; }
-        
+
         public DbSet<UserComments> UserComments { get; set; }
-
-        public DbSet<SharedItinerary> SharedItineraries { get; set; }
-
-        public DbSet<Friendships> Friendships { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            //Set the default behavior of an Itinerary's date in the database to be the current date/time 
+            //Set the default behavior of an Itinerary's date in the database to be the current date/time if none is provided by the client
             builder.Entity<Itinerary>()
                 .Property(i => i.DateOfEvent)
                 .HasDefaultValueSql("GETDATE()");
@@ -54,6 +51,18 @@ namespace Capstone.Data
             builder.Entity<Itinerary>()
                 .HasMany(i => i.ItineraryBreweries)
                 .WithOne(ib => ib.Itinerary)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //Restrict deletion of related Comment when UserComments is removed
+            builder.Entity<Comment>()
+                .HasMany(c => c.UserComments)
+                .WithOne(uc => uc.Comment)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //Restrict deletion of related ApplicationUser when UserComments is removed
+            builder.Entity<ApplicationUser>()
+                .HasMany(au => au.UserComments)
+                .WithOne(uc => uc.User)
                 .OnDelete(DeleteBehavior.Restrict);
 
             ApplicationUser user1 = new ApplicationUser()
@@ -100,7 +109,17 @@ namespace Capstone.Data
                     UserId = user1.Id,
                     Name = "Denver Trip",
                     City = "Denver",
-                    State = "CO"
+                    State = "CO",
+                    DateOfEvent = new DateTime(2020, 5, 19)
+                },
+                new Itinerary()
+                {
+                    Id = 4,
+                    UserId = user1.Id,
+                    Name = "My Birthday",
+                    City = "Nashville",
+                    State = "TN",
+                    DateOfEvent = new DateTime(2020, 11, 11)
                 },
                 new Itinerary()
                 {
@@ -108,9 +127,19 @@ namespace Capstone.Data
                     UserId = user2.Id,
                     Name = "Katie's Birthday",
                     City = "Allentown",
-                    State = "PA"
+                    State = "PA",
+                    DateOfEvent = new DateTime(2020, 7, 20)
+                },
+                new Itinerary()
+                {
+                    Id = 3,
+                    UserId = user2.Id,
+                    Name = "New Years Bash",
+                    City = "Nashville",
+                    State = "TN",
+                    DateOfEvent = new DateTime(2020, 1, 1)
                 }
-                );
+           );
         }
     }
 }

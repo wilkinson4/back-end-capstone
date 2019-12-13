@@ -6,7 +6,6 @@ import Register from './components/Register';
 import Home from './components/Home';
 import BreweryList from './components/BreweryList';
 import AddBrewery from './components/AddBrewery';
-import { createAuthHeaders } from './API/userManager';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 
@@ -27,17 +26,6 @@ class App extends Component {
     this.setState({
       [stateProperty]: stateValue
     })
-  }
-
-  componentDidMount() {
-    const authHeader = createAuthHeaders();
-    fetch('/api/v1/itineraries', {
-      headers: authHeader
-    })
-      .then(response => response.json())
-      .then(itineraries => {
-        this.setState({itineraries: itineraries });
-      });
   }
 
   render() {

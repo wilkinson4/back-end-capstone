@@ -19,5 +19,7 @@ namespace Capstone.Models.Data
         public Itinerary Itinerary { get; set; }
 
         public ICollection<Review> Reviews { get; set; }
+
+        public ICollection<UserComments> UserComments { get; set; }
     }
 }

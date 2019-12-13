@@ -57,11 +57,11 @@ namespace Capstone.Migrations
                     Name = table.Column<string>(nullable: false),
                     Brewery_Type = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: false),
                     Postal_Code = table.Column<string>(nullable: false),
-                    Longitude = table.Column<string>(nullable: false),
-                    Latitude = table.Column<string>(nullable: false),
+                    Longitude = table.Column<string>(nullable: true),
+                    Latitude = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: false),
                     Website_URL = table.Column<string>(nullable: false)
                 },
@@ -177,39 +177,12 @@ namespace Capstone.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Friendships",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    User1Id = table.Column<string>(nullable: false),
-                    User2Id = table.Column<string>(nullable: false),
-                    IsFriend = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Friendships", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Friendships_AspNetUsers_User1Id",
-                        column: x => x.User1Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Friendships_AspNetUsers_User2Id",
-                        column: x => x.User2Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Itineraries",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
                     DateOfEvent = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     Name = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
@@ -345,39 +318,6 @@ namespace Capstone.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SharedItineraries",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<string>(nullable: false),
-                    OtherUserId = table.Column<string>(nullable: false),
-                    ItineraryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SharedItineraries", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SharedItineraries_Itineraries_ItineraryId",
-                        column: x => x.ItineraryId,
-                        principalTable: "Itineraries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SharedItineraries_AspNetUsers_OtherUserId",
-                        column: x => x.OtherUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SharedItineraries_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserComments",
                 columns: table => new
                 {
@@ -406,22 +346,22 @@ namespace Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "d9edec8d-5bac-4e48-83a5-8c3e5da070a2", "andy@andy.com", true, "Andy", "Collins", false, null, "ANDY@ANDY.COM", "ANDY123", "AQAAAAEAACcQAAAAELNU/rqnMF6vC+0EBEwoKkm9Xtj16THYbAAT27Yvng+sh0BhV5FlMPl1H2wsblQXKA==", "610-123-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "andy123" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "75c326b1-9fb1-4200-ac94-5e7acd9f3056", "andy@andy.com", true, "Andy", "Collins", false, null, "ANDY@ANDY.COM", "ANDY123", "AQAAAAEAACcQAAAAEEOmpqk6kfTOl35v6pH9edF2PGTtQz7f5/wSnKV0yY0dvc1xXtDhrEenp8duij18cg==", "610-123-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "andy123" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-fffffffff123", 0, "3645bb8c-d700-4efc-9140-eab5bc5c70af", "jenny@jenny.com", true, "Jenny", "Wilkinson", false, null, "JENNY@JENNY.COM", "JENNY123", "AQAAAAEAACcQAAAAEIJkQXSGKeM5k43ZFPvGaSaeflmYpkVXGZLQ7rJdK2/WdGnhLpEuo7sMJT+iYBaaeg==", "610-989-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794123", false, "jenny123" });
+                values: new object[] { "00000000-ffff-ffff-ffff-fffffffff123", 0, "4108b0ee-559b-4a95-a11d-4cd55f3cafbd", "jenny@jenny.com", true, "Jenny", "Wilkinson", false, null, "JENNY@JENNY.COM", "JENNY123", "AQAAAAEAACcQAAAAEKv/+2/9lLqOZ197S4Dtc3araJNGSbN6ky0OWdr/kWVP/xa7585eM87TDmMtrBV6Lg==", "610-989-4567", false, "7f434309-a4d9-48e9-9ebb-8803db794123", false, "jenny123" });
 
             migrationBuilder.InsertData(
                 table: "Itineraries",
-                columns: new[] { "Id", "City", "Name", "State", "UserId" },
-                values: new object[] { 1, "Denver", "Denver Trip", "CO", "00000000-ffff-ffff-ffff-ffffffffffff" });
+                columns: new[] { "Id", "City", "DateOfEvent", "Name", "State", "UserId" },
+                values: new object[] { 4, "Nashville", new DateTime(2020, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "My Birthday", "TN", "00000000-ffff-ffff-ffff-ffffffffffff" });
 
             migrationBuilder.InsertData(
                 table: "Itineraries",
-                columns: new[] { "Id", "City", "Name", "State", "UserId" },
-                values: new object[] { 2, "Allentown", "Katie's Birthday", "PA", "00000000-ffff-ffff-ffff-fffffffff123" });
+                columns: new[] { "Id", "City", "DateOfEvent", "Name", "State", "UserId" },
+                values: new object[] { 3, "Nashville", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "New Years Bash", "TN", "00000000-ffff-ffff-ffff-fffffffff123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -473,21 +413,10 @@ namespace Capstone.Migrations
                 column: "ItineraryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Friendships_User1Id",
-                table: "Friendships",
-                column: "User1Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Friendships_User2Id",
-                table: "Friendships",
-                column: "User2Id");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Itineraries_UserId",
                 table: "Itineraries",
                 column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItineraryBreweries_BreweryId",
@@ -513,21 +442,6 @@ namespace Capstone.Migrations
                 name: "IX_Reviews_UserId",
                 table: "Reviews",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SharedItineraries_ItineraryId",
-                table: "SharedItineraries",
-                column: "ItineraryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SharedItineraries_OtherUserId",
-                table: "SharedItineraries",
-                column: "OtherUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SharedItineraries_OwnerId",
-                table: "SharedItineraries",
-                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserComments_CommentId",
@@ -561,9 +475,6 @@ namespace Capstone.Migrations
                 name: "Beers");
 
             migrationBuilder.DropTable(
-                name: "Friendships");
-
-            migrationBuilder.DropTable(
                 name: "ItineraryBreweries");
 
             migrationBuilder.DropTable(
@@ -571,9 +482,6 @@ namespace Capstone.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reviews");
-
-            migrationBuilder.DropTable(
-                name: "SharedItineraries");
 
             migrationBuilder.DropTable(
                 name: "UserComments");

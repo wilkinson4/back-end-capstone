@@ -17,7 +17,7 @@ function BreweryList(props) {
 
     return (
         <section className="breweryList__section">
-            <h1>BreweryResults</h1>
+            <h1>Brewery Results</h1>
             <ol className="breweryList__ol">
                 {
                     breweries.map(b => {
