@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191211175850_Initial")]
+    [Migration("20191213165342_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,7 +117,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9edec8d-5bac-4e48-83a5-8c3e5da070a2",
+                            ConcurrencyStamp = "75c326b1-9fb1-4200-ac94-5e7acd9f3056",
                             Email = "andy@andy.com",
                             EmailConfirmed = true,
                             FirstName = "Andy",
@@ -125,7 +125,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANDY@ANDY.COM",
                             NormalizedUserName = "ANDY123",
-                            PasswordHash = "AQAAAAEAACcQAAAAELNU/rqnMF6vC+0EBEwoKkm9Xtj16THYbAAT27Yvng+sh0BhV5FlMPl1H2wsblQXKA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEOmpqk6kfTOl35v6pH9edF2PGTtQz7f5/wSnKV0yY0dvc1xXtDhrEenp8duij18cg==",
                             PhoneNumber = "610-123-4567",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
@@ -136,7 +136,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-fffffffff123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3645bb8c-d700-4efc-9140-eab5bc5c70af",
+                            ConcurrencyStamp = "4108b0ee-559b-4a95-a11d-4cd55f3cafbd",
                             Email = "jenny@jenny.com",
                             EmailConfirmed = true,
                             FirstName = "Jenny",
@@ -144,7 +144,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JENNY@JENNY.COM",
                             NormalizedUserName = "JENNY123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIJkQXSGKeM5k43ZFPvGaSaeflmYpkVXGZLQ7rJdK2/WdGnhLpEuo7sMJT+iYBaaeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKv/+2/9lLqOZ197S4Dtc3araJNGSbN6ky0OWdr/kWVP/xa7585eM87TDmMtrBV6Lg==",
                             PhoneNumber = "610-989-4567",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794123",
@@ -183,7 +183,7 @@ namespace Capstone.Migrations
 
             modelBuilder.Entity("Capstone.Models.Data.Brewery", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -192,14 +192,13 @@ namespace Capstone.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Latitude")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Longitude")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -256,13 +255,13 @@ namespace Capstone.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Itineraries");
 
@@ -271,18 +270,36 @@ namespace Capstone.Migrations
                         {
                             Id = 1,
                             City = "Denver",
-                            DateOfEvent = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfEvent = new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Denver Trip",
                             State = "CO",
                             UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
                         },
                         new
                         {
+                            Id = 4,
+                            City = "Nashville",
+                            DateOfEvent = new DateTime(2020, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "My Birthday",
+                            State = "TN",
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        },
+                        new
+                        {
                             Id = 2,
                             City = "Allentown",
-                            DateOfEvent = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfEvent = new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Katie's Birthday",
                             State = "PA",
+                            UserId = "00000000-ffff-ffff-ffff-fffffffff123"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Nashville",
+                            DateOfEvent = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "New Years Bash",
+                            State = "TN",
                             UserId = "00000000-ffff-ffff-ffff-fffffffff123"
                         });
                 });
@@ -365,62 +382,6 @@ namespace Capstone.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Friendships", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsFriend")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("User1Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("User2Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("User1Id");
-
-                    b.HasIndex("User2Id");
-
-                    b.ToTable("Friendships");
-                });
-
-            modelBuilder.Entity("Capstone.Models.SharedItinerary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ItineraryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OtherUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItineraryId");
-
-                    b.HasIndex("OtherUserId");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("SharedItineraries");
                 });
 
             modelBuilder.Entity("Capstone.Models.UserComments", b =>
@@ -603,7 +564,9 @@ namespace Capstone.Migrations
                 {
                     b.HasOne("Capstone.Models.Data.ApplicationUser", "User")
                         .WithOne("Itinerary")
-                        .HasForeignKey("Capstone.Models.Data.Itinerary", "UserId");
+                        .HasForeignKey("Capstone.Models.Data.Itinerary", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Capstone.Models.Data.ItineraryBrewery", b =>
@@ -643,54 +606,18 @@ namespace Capstone.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Capstone.Models.Friendships", b =>
-                {
-                    b.HasOne("Capstone.Models.Data.ApplicationUser", "User1")
-                        .WithMany()
-                        .HasForeignKey("User1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Capstone.Models.Data.ApplicationUser", "User2")
-                        .WithMany()
-                        .HasForeignKey("User2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Capstone.Models.SharedItinerary", b =>
-                {
-                    b.HasOne("Capstone.Models.Data.Itinerary", "Itinerary")
-                        .WithMany()
-                        .HasForeignKey("ItineraryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Capstone.Models.Data.ApplicationUser", "OtherUser")
-                        .WithMany()
-                        .HasForeignKey("OtherUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Capstone.Models.Data.ApplicationUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Capstone.Models.UserComments", b =>
                 {
                     b.HasOne("Capstone.Models.Comment", "Comment")
-                        .WithMany()
+                        .WithMany("UserComments")
                         .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Capstone.Models.Data.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("UserComments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

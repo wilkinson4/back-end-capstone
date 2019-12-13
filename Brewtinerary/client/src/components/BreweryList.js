@@ -17,12 +17,21 @@ function BreweryList(props) {
 
     return (
         <section className="breweryList__section">
+            <h1>Brewery Results</h1>
             <ol className="breweryList__ol">
-                <li>
-                    {
-                        breweries.map(b => <p>{b.name}</p>)
-                    }
-                </li>
+                {
+                    breweries.map(b => {
+                        // Don't render a brewery card for breweries that have a brewery_type of "planning"
+                        return b.brewery_type !== "planning" &&
+                            <li>
+                                <BreweryCard {...props}
+                                    brewery={b}
+                                    key={b.id} 
+                                    stateHandler={props.stateHandler}
+                                    />
+                            </li>
+                    })
+                }
             </ol>
         </section>
     )
