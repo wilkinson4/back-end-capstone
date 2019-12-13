@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import './css/AddBrewery.css'
+import BreweryManager from '../API/breweryManager';
 
 
 function AddBrewery(props) {
     const [selectedItinerary, updateSelectedItinerary] = useState({})
+    const history = useHistory()
 
     const options = props.itineraries.map(i => {
         return { value: i.id, label: i.name }
@@ -17,13 +20,8 @@ function AddBrewery(props) {
     function addBrewery() {
         // check if an itinerary is selected
         if (selectedItinerary.hasOwnProperty("value")) {
-            fetch(`/api/v1/breweries/create/${selectedItinerary.value}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(props.currentBrewery)
-            })
+            BreweryManager.addBreweryToItinerary(selectedItinerary, props.currentBrewery)
+            history.push("/")
         }
     }
 
