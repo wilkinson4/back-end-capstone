@@ -12,7 +12,7 @@ using Capstone.Models.ViewModels;
 
 namespace Capstone.Controllers.V1
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class ItinerariesController : ControllerBase
     {
@@ -43,6 +43,11 @@ namespace Capstone.Controllers.V1
                                            .ThenInclude(ib => ib.Brewery)
                                            .FirstOrDefaultAsync(i => i.Id == id);
 
+            if (itineraryFromDB == null)
+            {
+                return NotFound();
+            }
+
             var itineraryWithoutCycleReference = new Itinerary()
             {
                 Id = itineraryFromDB.Id,
@@ -60,10 +65,6 @@ namespace Capstone.Controllers.V1
             };
 
 
-            if (itineraryWithoutCycleReference == null)
-            {
-                return NotFound();
-            }
 
             return Ok(itineraryWithoutCycleReference);
         }
@@ -112,21 +113,31 @@ namespace Capstone.Controllers.V1
         //    return CreatedAtAction("GetItinerary", new { id = itinerary.Id }, itinerary);
         //}
 
-        //// DELETE: api/Itineraries/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Itinerary>> DeleteItinerary(int id)
-        //{
-        //    var itinerary = await _context.Itineraries.FindAsync(id);
-        //    if (itinerary == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/Itineraries/5
+        [HttpDelete(Api.Itineraries.Delete)]
+        public async Task<ActionResult<Itinerary>> DeleteItinerary(int id)
+        {
+            var itinerary = await _context.Itineraries
+                                           .Include(i => i.ItineraryBreweries)
+                                           .ThenInclude(ib => ib.Brewery)
+                                           .FirstOrDefaultAsync(i => i.Id == id);
+            if (itinerary == null)
+            {
+                return NotFound();
+            }
 
-        //    _context.Itineraries.Remove(itinerary);
-        //    await _context.SaveChangesAsync();
+            foreach (ItineraryBrewery ib in itinerary.ItineraryBreweries)
+            {
+                _context.Remove(ib);
+                _context.Remove(ib.Brewery);
+            }
+            await _context.SaveChangesAsync();
 
-        //    return itinerary;
-        //}
+            _context.Itineraries.Remove(itinerary);
+            await _context.SaveChangesAsync();
+
+            return itinerary;
+        }
 
         //private bool ItineraryExists(int id)
         //{
