@@ -6,6 +6,7 @@ import Register from './components/Register';
 import Home from './components/Home';
 import BreweryList from './components/Breweries/BreweryList';
 import AddBrewery from './components/Breweries/AddBrewery';
+import ItineraryDetails from './components/Itineraries/ItineraryDetails';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 
@@ -14,7 +15,8 @@ class App extends Component {
     user: getUser(),
     brewerySearchText: "",
     itineraries: [],
-    currentBrewery: {}
+    currentBrewery: {},
+    currentItinerary: {}
   }
 
   logout = () => {
@@ -44,12 +46,25 @@ class App extends Component {
           <Route exact path="/register" render={() => (
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
+
+          {/* ITINERARY ROUTES */}
           <Route exact path="/" render={() => {
             return this.state.user ? (
               <Home {...this.props} itineraries={this.state.itineraries} stateHandler={this.stateHandler} />
             ) : <Redirect to="/login" />
           }} />
 
+          <Route path="/itineraries/:itineraryId(\d+)" render={() => {
+            return this.state.user ? (
+              <ItineraryDetails
+                {...this.props}
+                stateHandler={this.stateHandler}
+                currentItinerary={this.state.currentItinerary}
+              />
+            ) : <Redirect to="/login" />
+          }} />
+
+          {/* BREWERY ROUTES */}
           <Route exact path="/breweries" render={() => {
             return this.state.user ? (
               <BreweryList
@@ -69,6 +84,7 @@ class App extends Component {
             ) : <Redirect to="/login" />
           }}
           />
+
         </Router>
       </div>
     );

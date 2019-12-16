@@ -12,7 +12,7 @@ using Capstone.Models.ViewModels;
 
 namespace Capstone.Controllers.V1
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class ItinerariesController : ControllerBase
     {
