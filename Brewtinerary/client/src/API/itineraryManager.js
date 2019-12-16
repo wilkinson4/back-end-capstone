@@ -16,7 +16,15 @@ export default {
         return fetch(`${url}/${id}`, {
             headers: authHeader
         })
-        .then(response => response.json())
+            .then(response => response.json())
+    },
+
+    deleteItinerary(id) {
+        return fetch(`${url}/${id}`, {
+            headers: authHeader,
+            method: "DELETE"
+        })
+            .then(response => response.json())
     }
 
 }

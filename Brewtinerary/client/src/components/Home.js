@@ -19,20 +19,25 @@ class Home extends Component {
 
   componentDidMount() {
     ItineraryManager.getAllItineraries()
-    .then(itineraries => this.props.stateHandler("itineraries", itineraries))
+      .then(itineraries => this.props.stateHandler("itineraries", itineraries))
   }
 
   render() {
     return (
       <>
         <h1>My Itineraries</h1>
-            {
-              this.props.itineraries.map(itinerary =>{
-                return(
-                  <ItineraryCard {...this.props} itinerary={itinerary} key={itinerary.id}/>
-                )
-              })
-            }
+        {
+          this.props.itineraries.map(itinerary => {
+            return (
+              <ItineraryCard
+                {...this.props}
+                itinerary={itinerary}
+                key={itinerary.id}
+                stateHandler={this.props.stateHandler}
+              />
+            )
+          })
+        }
         <input onChange={this.handleInputChange} id="textToFilterBy" name="textToFilterBy" type="text" placeholder="Filter the itineraries" />
         <button onClick={this.filterValues}>Submit</button>
       </>
