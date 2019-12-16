@@ -8,6 +8,7 @@ using Capstone.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
 using Capstone.Helpers;
+using Capstone.Models.ViewModels;
 
 namespace Capstone.Controllers.V1
 {
@@ -27,21 +28,44 @@ namespace Capstone.Controllers.V1
         public async Task<ActionResult<IEnumerable<Itinerary>>> GetAll()
         {
             var userId = HttpContext.GetUserId();
-            return await _context.Itineraries.Where(i => i.UserId == userId).ToListAsync();
+            return await _context.Itineraries
+                                 .OrderBy(i => i.DateOfEvent)
+                                 .Where(i => i.UserId == userId)
+                                 .ToListAsync();
         }
 
         // GET: api/v1/Itineraries/5
         [HttpGet(Api.Itineraries.Get)]
         public async Task<ActionResult<Itinerary>> Get(int id)
         {
-            var itinerary = await _context.Itineraries.FindAsync(id);
+            var itineraryFromDB = await _context.Itineraries
+                                           .Include(i => i.ItineraryBreweries)
+                                           .ThenInclude(ib => ib.Brewery)
+                                           .FirstOrDefaultAsync(i => i.Id == id);
 
-            if (itinerary == null)
+            var itineraryWithoutCycleReference = new Itinerary()
+            {
+                Id = itineraryFromDB.Id,
+                Name = itineraryFromDB.Name,
+                DateOfEvent = itineraryFromDB.DateOfEvent,
+                City = itineraryFromDB.City,
+                State = itineraryFromDB.State,
+                ItineraryBreweryViewModels = itineraryFromDB.ItineraryBreweries.Select(ib => new ItineraryBreweryViewModel()
+                {
+                    Id = ib.Id,
+                    BreweryId = ib.BreweryId,
+                    ItineraryId = ib.ItineraryId,
+                    Brewery = ib.Brewery
+                }).ToList()
+            };
+
+
+            if (itineraryWithoutCycleReference == null)
             {
                 return NotFound();
             }
 
-            return itinerary;
+            return Ok(itineraryWithoutCycleReference);
         }
 
         //// PUT: api/Itineraries/5
