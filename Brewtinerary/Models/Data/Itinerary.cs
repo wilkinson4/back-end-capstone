@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capstone.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,5 +31,7 @@ namespace Capstone.Models.Data
         public string State { get; set; }
 
         public virtual ICollection<ItineraryBrewery> ItineraryBreweries { get; set; }
+
+        public List<ItineraryBreweryViewModel> ItineraryBreweryViewModels { get; set; }
     }
 }

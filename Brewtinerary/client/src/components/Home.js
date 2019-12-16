@@ -20,6 +20,7 @@ class Home extends Component {
   componentDidMount() {
     ItineraryManager.getAllItineraries()
     .then(itineraries => this.props.stateHandler("itineraries", itineraries))
+    .then(() => ItineraryManager.getAnItinerary(3))
   }
 
   render() {
