@@ -25,6 +25,15 @@ export default {
             method: "DELETE"
         })
             .then(response => response.json())
+    },
+
+    editItinerary(id, editedItinerary) {
+        return fetch(`${url}/${id}`, {
+            headers: authHeader,
+            method: "PUT",
+            body: JSON.stringify(editedItinerary)
+        })
+            .then(response => response.json())
     }
 
 }

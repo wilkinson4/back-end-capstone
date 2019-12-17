@@ -18,8 +18,11 @@ namespace Capstone.Models.Data
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime DateOfEvent { get; set; }
+
+        [NotMapped]
+        public string ShortDate => DateOfEvent.ToString("d");
 
         [Required]
         public string Name { get; set; }

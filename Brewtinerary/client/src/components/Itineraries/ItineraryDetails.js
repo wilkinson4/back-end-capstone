@@ -1,11 +1,13 @@
 import React, { useEffect, useCallback } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import ItineraryManager from '../../API/itineraryManager';
 import AddedBreweryCard from '../Breweries/AddedBreweryCard';
 
 
 function ItineraryDetails(props) {
     const { itineraryId } = useParams();
+
+    const history = useHistory();
 
     const getItinerary = useCallback(() => {
         ItineraryManager.getAnItinerary(itineraryId)
@@ -24,14 +26,16 @@ function ItineraryDetails(props) {
         getItinerary()
     }, [getItinerary])
 
+
     return (
 
         <section className="itineraryDetails__section">
             <h1>Itinerary Details Page</h1>
             <div className="itineraryDetails__div">
                 <h3>{props.currentItinerary.name}</h3>
-                <p>{props.currentItinerary.dateOfEvent}</p>
+                <p>{props.currentItinerary.shortDate}</p>
                 <p>{`${props.currentItinerary.city}, ${props.currentItinerary.state}`}</p>
+                <button onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
             </div>
             <div className="breweryList__div">
                 <h3>Breweries</h3>
