@@ -13,7 +13,7 @@ using System;
 
 namespace Capstone.Controllers.V1
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class ItinerariesController : ControllerBase
     {
