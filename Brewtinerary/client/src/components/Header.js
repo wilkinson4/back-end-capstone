@@ -52,7 +52,6 @@ function Header(props) {
                   Search
                 </Link>
               </li>
-              <li className="nav-item">Hello {props.user.username}</li>
               <li className="nav-item" onClick={props.logout}>Log out</li>
             </>
           ) : (
