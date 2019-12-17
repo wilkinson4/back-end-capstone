@@ -17,7 +17,6 @@ function CreateItinerary(props) {
         newItinerary.dateOfEvent = new Date(itinerary.date)
         ItineraryManager.createItinerary(newItinerary)
             .then(newItinerary => {
-                props.stateHandler("currentItinerary", newItinerary)
                 history.push("/")
             })
     }
