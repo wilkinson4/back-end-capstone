@@ -87,7 +87,7 @@ namespace Capstone.Controllers.V1
             {
                 Id = ievm.Id,
                 Name = ievm.Name,
-                DateOfEvent = DateTime.Parse(ievm.DateOfEvent),
+                DateOfEvent = ievm.DateOfEvent,
                 City = ievm.City,
                 State = ievm.State,
                 UserId = userId
@@ -124,9 +124,8 @@ namespace Capstone.Controllers.V1
 
             var itinerary = new Itinerary()
             {
-                Id = icvm.Id,
                 Name = icvm.Name,
-                DateOfEvent = DateTime.Parse(icvm.DateOfEvent),
+                DateOfEvent = icvm.DateOfEvent,
                 City = icvm.City,
                 State = icvm.State,
                 UserId = userId
@@ -135,7 +134,7 @@ namespace Capstone.Controllers.V1
             _context.Itineraries.Add(itinerary);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItinerary", new { id = itinerary.Id }, itinerary);
+            return Ok(itinerary);
         }
 
         // DELETE: api/Itineraries/5

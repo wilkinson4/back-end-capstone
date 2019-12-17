@@ -7,6 +7,7 @@ import Home from './components/Home';
 import BreweryList from './components/Breweries/BreweryList';
 import AddBrewery from './components/Breweries/AddBrewery';
 import ItineraryDetails from './components/Itineraries/ItineraryDetails';
+import CreateItinerary from './components/Itineraries/CreateItinerary';
 import EditItinerary from './components/Itineraries/EditItinerary';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
@@ -26,14 +27,11 @@ class App extends Component {
   }
 
   stateHandler = (stateProperty, stateValue) => {
-    console.log("inside stateHandler function" + this.state.itineraries[0])
     this.setState({
       [stateProperty]: stateValue
     })
-    console.log("inside stateHandler function after setting state" + this.state.itineraries[0].name)
-
   }
-  
+
 
   render() {
     return (
@@ -67,6 +65,15 @@ class App extends Component {
                 {...this.props}
                 stateHandler={this.stateHandler}
                 currentItinerary={this.state.currentItinerary}
+              />
+            ) : <Redirect to="/login" />
+          }} />
+
+          <Route path="/itineraries/create" render={() => {
+            return this.state.user ? (
+              <CreateItinerary
+                {...this.props}
+                stateHandler={this.stateHandler}
               />
             ) : <Redirect to="/login" />
           }} />

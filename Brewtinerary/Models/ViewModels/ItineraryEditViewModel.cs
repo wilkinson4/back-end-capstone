@@ -14,7 +14,9 @@ namespace Capstone.Models.ViewModels
 
         public string? UserId { get; set; }
 
-        public string DateOfEvent { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        public DateTime DateOfEvent { get; set; }
 
         public string Name { get; set; }
 
