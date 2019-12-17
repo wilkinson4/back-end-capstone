@@ -11,12 +11,6 @@ namespace Capstone.Routes.V1
         internal const string Version = "v1";
         internal const string Base = Root + "/" + Version;
 
-        public static class Values
-        {
-            public const string GetAll = Base + "/Values";
-            public const string Get = Base + "/Values/{id}";
-        }
-
         public static class User
         {
             public const string Login = Base + "/Auth/Login";
@@ -29,7 +23,8 @@ namespace Capstone.Routes.V1
             public const string GetAll = Base + "/Itineraries";
             public const string Get = Base + "/Itineraries/{id}";
             public const string Delete = Base + "/Itineraries/{id}";
-            public const string Edit = Base + "/Itineraries/{id}";
+            public const string Put = Base + "/Itineraries/{id}";
+            public const string Post = Base + "/Itineraries/Create";
         }
 
         public static class Breweries

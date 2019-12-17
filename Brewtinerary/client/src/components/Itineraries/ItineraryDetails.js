@@ -14,7 +14,7 @@ function ItineraryDetails(props) {
             .then(itinerary => {
                 if (props.currentItinerary.id !== itinerary.id) {
                     props.stateHandler("currentItinerary", itinerary)
-                } else if(props.currentItinerary.hasOwnProperty("itineraryBreweryViewModels")) {
+                } else if(!!props.currentItinerary.itineraryBreweryViewModels) {
                     if(props.currentItinerary.itineraryBreweryViewModels.length !== itinerary.itineraryBreweryViewModels.length){
                         props.stateHandler("currentItinerary", itinerary)
                     }
@@ -40,7 +40,7 @@ function ItineraryDetails(props) {
             <div className="breweryList__div">
                 <h3>Breweries</h3>
                 {
-                    props.currentItinerary.hasOwnProperty("itineraryBreweryViewModels") &&
+                    !!props.currentItinerary.itineraryBreweryViewModels &&
                     props.currentItinerary.itineraryBreweryViewModels.map(ibvm => {
                         return <AddedBreweryCard
                             key={ibvm.brewery.id}

@@ -41,6 +41,17 @@ export default {
             body: JSON.stringify(editedItinerary)
         })
             .then(response => response.json())
+    },
+
+    createItinerary(newItinerary) {
+        const authHeader = createAuthHeaders();
+
+        return fetch(`${url}/create`, {
+            headers: authHeader,
+            method: "POST",
+            body: JSON.stringify(newItinerary)
+        })
+            .then(response => response.json())
     }
 
 }

@@ -1,15 +1,10 @@
-﻿
-
-using Capstone.Models.Data;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Capstone.Models.ViewModels
 {
-    public class ItineraryEditViewModel
+    public class ItineraryCreateViewModel
     {
-        
         public int Id { get; set; }
 
         public string? UserId { get; set; }
@@ -23,6 +18,5 @@ namespace Capstone.Models.ViewModels
         public string City { get; set; }
 
         public string State { get; set; }
-
     }
 }
