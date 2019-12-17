@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
 using Capstone.Helpers;
 using Capstone.Models.ViewModels;
+using System;
 
 namespace Capstone.Controllers.V1
 {
@@ -69,37 +70,49 @@ namespace Capstone.Controllers.V1
             return Ok(itineraryWithoutCycleReference);
         }
 
-        //// PUT: api/Itineraries/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutItinerary(int id, Itinerary itinerary)
-        //{
-        //    if (id != itinerary.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Itineraries/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut(Api.Itineraries.Edit)]
+        public async Task<IActionResult> PutItinerary(int id, ItineraryEditViewModel ievm)
+        {
+            if (id != ievm.Id)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(itinerary).State = EntityState.Modified;
+            var userId = HttpContext.GetUserId();
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ItineraryExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            var itinerary = new Itinerary()
+            {
+                Id = ievm.Id,
+                Name = ievm.Name,
+                DateOfEvent = ievm.DateOfEvent,
+                City = ievm.City,
+                State = ievm.State,
+                UserId = userId
+            };
 
-        //    return NoContent();
-        //}
+            _context.Entry(itinerary).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (!ItineraryExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+
+            return Ok(itinerary);
+        }
 
         //// POST: api/Itineraries
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -139,9 +152,9 @@ namespace Capstone.Controllers.V1
             return itinerary;
         }
 
-        //private bool ItineraryExists(int id)
-        //{
-        //    return _context.Itineraries.Any(e => e.Id == id);
-        //}
+        private bool ItineraryExists(int id)
+        {
+            return _context.Itineraries.Any(e => e.Id == id);
+        }
     }
 }
