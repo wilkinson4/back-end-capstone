@@ -73,7 +73,7 @@ namespace Capstone.Controllers.V1
         // PUT: api/Itineraries/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut(Api.Itineraries.Edit)]
+        [HttpPut(Api.Itineraries.Put)]
         public async Task<IActionResult> PutItinerary(int id, ItineraryEditViewModel ievm)
         {
             if (id != ievm.Id)
@@ -87,7 +87,7 @@ namespace Capstone.Controllers.V1
             {
                 Id = ievm.Id,
                 Name = ievm.Name,
-                DateOfEvent = ievm.DateOfEvent,
+                DateOfEvent = DateTime.Parse(ievm.DateOfEvent),
                 City = ievm.City,
                 State = ievm.State,
                 UserId = userId
@@ -114,17 +114,29 @@ namespace Capstone.Controllers.V1
             return Ok(itinerary);
         }
 
-        //// POST: api/Itineraries
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPost]
-        //public async Task<ActionResult<Itinerary>> PostItinerary(Itinerary itinerary)
-        //{
-        //    _context.Itineraries.Add(itinerary);
-        //    await _context.SaveChangesAsync();
+        // POST: api/Itineraries
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost(Api.Itineraries.Post)]
+        public async Task<ActionResult<Itinerary>> PostItinerary(ItineraryCreateViewModel icvm)
+        {
+            var userId = HttpContext.GetUserId();
 
-        //    return CreatedAtAction("GetItinerary", new { id = itinerary.Id }, itinerary);
-        //}
+            var itinerary = new Itinerary()
+            {
+                Id = icvm.Id,
+                Name = icvm.Name,
+                DateOfEvent = DateTime.Parse(icvm.DateOfEvent),
+                City = icvm.City,
+                State = icvm.State,
+                UserId = userId
+            };
+
+            _context.Itineraries.Add(itinerary);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetItinerary", new { id = itinerary.Id }, itinerary);
+        }
 
         // DELETE: api/Itineraries/5
         [HttpDelete(Api.Itineraries.Delete)]
