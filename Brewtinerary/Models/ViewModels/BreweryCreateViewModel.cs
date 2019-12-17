@@ -34,8 +34,6 @@ namespace Capstone.Models.ViewModels
         [Phone]
         public string Phone { get; set; }
 
-        [Required]
-        [Url]
         public string Website_URL { get; set; }
     }
 }

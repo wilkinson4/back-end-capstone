@@ -19,7 +19,7 @@ function AddBrewery(props) {
 
     function addBrewery() {
         // check if an itinerary is selected
-        if (selectedItinerary.hasOwnProperty("value")) {
+        if (!!selectedItinerary.value) {
             BreweryManager.addBreweryToItinerary(selectedItinerary, props.currentBrewery)
             history.push("/")
         }

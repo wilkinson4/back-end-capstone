@@ -39,9 +39,7 @@ namespace Capstone.Models.Data
         [Phone]
         public string Phone { get; set; }
 
-        [Required]
-        [Url]
-        public string Website_URL { get; set; }
+        public string? Website_URL { get; set; }
 
         public ICollection<Beer> Beers { get; set; }
 

@@ -14,6 +14,7 @@ namespace Capstone.Models.Data
         [Required]
         public string UserId { get; set; }
 
+        [NotMapped]
         public ApplicationUser User { get; set; }
 
         [Required]

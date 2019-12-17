@@ -6,13 +6,16 @@ function AddedBreweryCard(props) {
             <h4>{props.brewery.name}</h4>
             <p>{props.brewery.street}, {props.brewery.city}, {props.brewery.state}, {props.brewery.postal_code}</p>
             <p>{props.brewery.phone}</p>
-            <a
-                href={props.brewery.website_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Website
+            {
+                props.brewery.website_URL &&
+                <a
+                    href={props.brewery.website_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Website
                 </a>
+            }
         </div>
     )
 }
