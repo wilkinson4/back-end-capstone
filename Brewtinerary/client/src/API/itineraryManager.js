@@ -1,11 +1,12 @@
 import { createAuthHeaders } from '../API/userManager';
 
 const url = "/api/v1/itineraries"
-const authHeader = createAuthHeaders();
 
 export default {
 
     getAllItineraries() {
+        const authHeader = createAuthHeaders();
+
         return fetch(url, {
             headers: authHeader
         })
@@ -13,6 +14,8 @@ export default {
     },
 
     getAnItinerary(id) {
+        const authHeader = createAuthHeaders();
+
         return fetch(`${url}/${id}`, {
             headers: authHeader
         })
@@ -20,6 +23,8 @@ export default {
     },
 
     deleteItinerary(id) {
+        const authHeader = createAuthHeaders();
+
         return fetch(`${url}/${id}`, {
             headers: authHeader,
             method: "DELETE"
@@ -28,6 +33,8 @@ export default {
     },
 
     editItinerary(id, editedItinerary) {
+        const authHeader = createAuthHeaders();
+
         return fetch(`${url}/${id}`, {
             headers: authHeader,
             method: "PUT",

@@ -5,21 +5,17 @@ import "./css/Home.css";
 
 class Home extends Component {
   state = {
-    textToFilterBy: ""
-  }
-
-
-  handleInputChange = (event) => {
-    console.log("Handle input change function");
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
+    loadingStatus: true
   }
 
   componentDidMount() {
+    console.log("Home.js componentDidMount called")
     ItineraryManager.getAllItineraries()
-      .then(itineraries => this.props.stateHandler("itineraries", itineraries))
+      .then(itineraries => {
+        console.log("inside updating itineraries state")
+        this.props.stateHandler("itineraries", itineraries)
+      })
+      .then((this.setState({loadingStatus: false})))
   }
 
   render() {
@@ -38,8 +34,6 @@ class Home extends Component {
             )
           })
         }
-        <input onChange={this.handleInputChange} id="textToFilterBy" name="textToFilterBy" type="text" placeholder="Filter the itineraries" />
-        <button onClick={this.filterValues}>Submit</button>
       </>
     )
   }

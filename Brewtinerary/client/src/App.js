@@ -21,15 +21,19 @@ class App extends Component {
   }
 
   logout = () => {
-    this.setState({ user: null });
+    this.setState({ user: null, itineraries: [] });
     removeUser();
   }
 
   stateHandler = (stateProperty, stateValue) => {
+    console.log("inside stateHandler function" + this.state.itineraries[0])
     this.setState({
       [stateProperty]: stateValue
     })
+    console.log("inside stateHandler function after setting state" + this.state.itineraries[0].name)
+
   }
+  
 
   render() {
     return (
