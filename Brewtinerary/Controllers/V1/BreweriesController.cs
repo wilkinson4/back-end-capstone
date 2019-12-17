@@ -35,8 +35,7 @@ namespace Capstone.Controllers.V1
             var response = await client.SendAsync(request);
 
             string breweriesAsJSON = await response.Content.ReadAsStringAsync();
-            //var breweries = await JsonSerializer.DeserializeAsync
-            //        <IEnumerable<Brewery>>(responseStream);
+
             return breweriesAsJSON;
         }
 
