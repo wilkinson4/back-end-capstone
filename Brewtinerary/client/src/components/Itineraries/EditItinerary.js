@@ -30,8 +30,12 @@ function EditItinerary(props) {
     const saveChanges = () => {
         const editedItinerary = itinerary
         editedItinerary.id = props.currentItinerary.id
+        editedItinerary.dateOfEvent = new Date(itinerary.date)
         ItineraryManager.editItinerary(editedItinerary.id, editedItinerary)
-        .then(editedItinerary => history.push("/"))
+        .then(editedItinerary => {
+            props.stateHandler("currentItinerary", editedItinerary)
+            history.push("/")
+        })
     }
 
     return (

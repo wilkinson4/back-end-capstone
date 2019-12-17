@@ -72,6 +72,7 @@ class App extends Component {
               <EditItinerary
                 {...this.props}
                 currentItinerary={this.state.currentItinerary}
+                stateHandler={this.stateHandler}
               />
             ) : <Redirect to="/login" />
           }} />

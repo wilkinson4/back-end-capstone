@@ -83,9 +83,17 @@ namespace Capstone.Controllers.V1
 
             var userId = HttpContext.GetUserId();
 
-            ievm.UserId = userId;
+            var itinerary = new Itinerary()
+            {
+                Id = ievm.Id,
+                Name = ievm.Name,
+                DateOfEvent = ievm.DateOfEvent,
+                City = ievm.City,
+                State = ievm.State,
+                UserId = userId
+            };
 
-            _context.Entry(ievm).State = EntityState.Modified;
+            _context.Entry(itinerary).State = EntityState.Modified;
 
             try
             {
@@ -103,7 +111,7 @@ namespace Capstone.Controllers.V1
                 }
             }
 
-            return NoContent();
+            return Ok(itinerary);
         }
 
         //// POST: api/Itineraries
