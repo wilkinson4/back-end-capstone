@@ -1,0 +1,10 @@
+.btn-primary {
+    color: #2b2b28;
+    background: linear-gradient(rgb(241, 214, 171), rgb(227, 176, 75));
+}
+
+.button { 
+    border: none;
+    font-family: inherit;
+    padding: 10px;
+ }

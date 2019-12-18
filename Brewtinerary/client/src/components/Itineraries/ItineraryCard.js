@@ -22,8 +22,8 @@ function ItineraryCard(props) {
             <h2>{props.itinerary.name}</h2>
             <p>{props.itinerary.shortDate}</p>
             <p>{`${props.itinerary.city}, ${props.itinerary.state}`}</p>
-            <button onClick={() => viewItineraryDetails()} id={props.itinerary.id}>View Details</button>
-            <button onClick={() => deleteItinerary()}>Delete Itinerary</button>
+            <button className="button btn-primary" onClick={() => viewItineraryDetails()} id={props.itinerary.id}>View Details</button>
+            <button className="button" onClick={() => deleteItinerary()}>Delete Itinerary</button>
         </div>
     )
 }

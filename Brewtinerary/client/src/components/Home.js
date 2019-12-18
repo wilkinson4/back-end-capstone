@@ -21,7 +21,7 @@ class Home extends Component {
     return (
       <>
         <h1>My Itineraries</h1>
-        <button onClick={() => this.props.history.push("/itineraries/create")}>Create Itinerary</button>
+        <button className="button" onClick={() => this.props.history.push("/itineraries/create")}>Create Itinerary</button>
         {
           this.props.itineraries.map(itinerary => {
             return (

@@ -15,6 +15,7 @@ function BreweryCard(props) {
             <div className="cardHeader__div">
                 <h3 className="brewery__h3">{props.brewery.name}</h3>
                 <button
+                    className="button"
                     onClick={onClick}>
                     Add To Itinerary
                     </button>
@@ -22,13 +23,16 @@ function BreweryCard(props) {
             <div className="cardBody__div">
                 <p>{props.brewery.street}, {props.brewery.city}, {props.brewery.state}, {props.brewery.postal_code}</p>
                 <p>{props.brewery.phone}</p>
-                <a
-                    href={props.brewery.website_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Website
-                </a>
+                {
+                    props.brewery.website_url !== "" &&
+                    <a
+                        href={props.brewery.website_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Website
+                    </a>
+                }
             </div>
         </div>
     )

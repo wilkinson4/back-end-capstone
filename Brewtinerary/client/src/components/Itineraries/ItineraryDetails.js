@@ -35,7 +35,7 @@ function ItineraryDetails(props) {
                 <h3>{props.currentItinerary.name}</h3>
                 <p>{props.currentItinerary.shortDate}</p>
                 <p>{`${props.currentItinerary.city}, ${props.currentItinerary.state}`}</p>
-                <button onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
+                <button className="button" onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
             </div>
             <div className="breweryList__div">
                 <h3>Breweries</h3>
