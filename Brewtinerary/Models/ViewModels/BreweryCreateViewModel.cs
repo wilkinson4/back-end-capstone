@@ -14,25 +14,19 @@ namespace Capstone.Models.ViewModels
 
         public string Brewery_Type { get; set; }
 
-        [Required]
         public string Street { get; set; }
 
-        [Required]
         public string City { get; set; }
 
-        [Required]
         public string State { get; set; }
 
-        [Required]
         public string Postal_Code { get; set; }
 
         public string? Longitude { get; set; }
 
         public string? Latitude { get; set; }
 
-        [Required]
-        [Phone]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         public string Website_URL { get; set; }
     }

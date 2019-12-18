@@ -35,9 +35,7 @@ namespace Capstone.Models.Data
 
         public string? Latitude { get; set; }
 
-        [Required]
-        [Phone]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         public string? Website_URL { get; set; }
 

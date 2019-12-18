@@ -12,7 +12,8 @@ function ItineraryDetails(props) {
     const getItinerary = useCallback(() => {
         ItineraryManager.getAnItinerary(itineraryId)
             .then(itinerary => {
-                if (props.currentItinerary.id !== itinerary.id) {
+                // if anything changes in an itinerary then update state
+                if (props.currentItinerary.id !== itinerary.id || props.currentItinerary.name !== itinerary.name || props.currentItinerary.dateOfEvent !== itinerary.dateOfEvent || props.currentItinerary.city !== itinerary.city || props.currentItinerary.state !== itinerary.state) {
                     props.stateHandler("currentItinerary", itinerary)
                 } else if(!!props.currentItinerary.itineraryBreweryViewModels) {
                     if(props.currentItinerary.itineraryBreweryViewModels.length !== itinerary.itineraryBreweryViewModels.length){

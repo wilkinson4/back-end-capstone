@@ -1,14 +1,13 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 function BreweryCard(props) {
     const history = useHistory()
 
-    const onClick = useCallback(() => {
+    const onClick = () => {
         history.push("/breweries/add")
         return props.stateHandler("currentBrewery", props.brewery)
-    }, [props, history])
-
+    }
 
     return (
         <div className="breweryCard__div">
