@@ -26,8 +26,7 @@ namespace Capstone.Models.ViewModels
 
         public string? Latitude { get; set; }
 
-        [Phone]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         public string Website_URL { get; set; }
     }

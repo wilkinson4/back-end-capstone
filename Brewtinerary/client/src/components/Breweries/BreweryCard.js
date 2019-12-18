@@ -1,14 +1,13 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 function BreweryCard(props) {
     const history = useHistory()
 
-    const onClick = useCallback(() => {
+    const onClick = () => {
         history.push("/breweries/add")
         return props.stateHandler("currentBrewery", props.brewery)
-    }, [props, history])
-
+    }
 
     return (
         <div className="breweryCard__div">
@@ -22,13 +21,16 @@ function BreweryCard(props) {
             <div className="cardBody__div">
                 <p>{props.brewery.street}, {props.brewery.city}, {props.brewery.state}, {props.brewery.postal_code}</p>
                 <p>{props.brewery.phone}</p>
-                <a
-                    href={props.brewery.website_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Website
-                </a>
+                {
+                    props.brewery.website_url !== "" &&
+                    <a
+                        href={props.brewery.website_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Website
+                    </a>
+                }
             </div>
         </div>
     )
