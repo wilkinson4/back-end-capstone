@@ -40,7 +40,7 @@ function CreateItinerary(props) {
                 <label htmlFor="state">State </label>
                 <input type="text" name="state" id="state" onChange={handleInputChange} />
             </div>
-            <button onClick={() => saveChanges()}>Create</button>
+            <button className="button" onClick={() => saveChanges()}>Create</button>
         </section>
     )
 }

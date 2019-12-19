@@ -92,7 +92,7 @@ class Register extends Component {
             required
             onChange={this.handleInputChange} />
         </div>
-        <button type="submit">Register</button>
+        <button className="button">Register</button>
         <p>
           Already registered? <Link to="/login">Log in</Link>
         </p>

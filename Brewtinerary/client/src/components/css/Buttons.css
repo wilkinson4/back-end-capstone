@@ -1,0 +1,31 @@
+.btn-primary {
+  color: #41290e;
+  background: linear-gradient(
+    180deg,
+    rgba(241, 214, 171, 0.9),
+    rgba(241, 214, 171, 0.9),
+    rgba(227, 176, 75, 0.9),
+    rgba(227, 176, 75, 0.9)
+  );
+  transition: 0.8s ease-in;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(230, 230, 230, 0.9),
+    rgba(230, 230, 230, 0.9),
+    rgba(241, 214, 171, 0.9),
+    rgba(227, 176, 75, 0.9)
+  );
+}
+
+.button {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 10px;
+}

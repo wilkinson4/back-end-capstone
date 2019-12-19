@@ -14,6 +14,7 @@ function BreweryCard(props) {
             <div className="cardHeader__div">
                 <h3 className="brewery__h3">{props.brewery.name}</h3>
                 <button
+                    className="button"
                     onClick={onClick}>
                     Add To Itinerary
                     </button>

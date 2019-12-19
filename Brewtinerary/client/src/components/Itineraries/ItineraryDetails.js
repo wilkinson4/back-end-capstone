@@ -12,20 +12,13 @@ function ItineraryDetails(props) {
     const getItinerary = useCallback(() => {
         ItineraryManager.getAnItinerary(itineraryId)
             .then(itinerary => {
-                // if anything changes in an itinerary then update state
-                if (props.currentItinerary.id !== itinerary.id || props.currentItinerary.name !== itinerary.name || props.currentItinerary.dateOfEvent !== itinerary.dateOfEvent || props.currentItinerary.city !== itinerary.city || props.currentItinerary.state !== itinerary.state) {
-                    props.stateHandler("currentItinerary", itinerary)
-                } else if(!!props.currentItinerary.itineraryBreweryViewModels) {
-                    if(props.currentItinerary.itineraryBreweryViewModels.length !== itinerary.itineraryBreweryViewModels.length){
-                        props.stateHandler("currentItinerary", itinerary)
-                    }
-                }
+                props.stateHandler("currentItinerary", itinerary)
             })
     }, [itineraryId, props])
 
     useEffect(() => {
         getItinerary()
-    }, [getItinerary])
+    }, [])
 
 
     return (
@@ -36,7 +29,7 @@ function ItineraryDetails(props) {
                 <h3>{props.currentItinerary.name}</h3>
                 <p>{props.currentItinerary.shortDate}</p>
                 <p>{`${props.currentItinerary.city}, ${props.currentItinerary.state}`}</p>
-                <button onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
+                <button className="button" onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
             </div>
             <div className="breweryList__div">
                 <h3>Breweries</h3>

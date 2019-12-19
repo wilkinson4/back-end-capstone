@@ -3,15 +3,16 @@
 }
 
 .header {
-  background-color: #282c34;
+  background-color: #e3b04b;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   font-size: calc(10px + 1vmin);
-  color: rgba(255, 255, 255, .8);
-  padding: 0 20px;;
+  color: #f8f8f8;
+  padding: 0 20px;
 }
+
 
 .nav-items {
   list-style: none;
@@ -30,31 +31,41 @@
 }
 
 .nav-item:hover {
-  color: rgba(255, 255, 255, 1);
+  color: #f1d6ab;
 }
 
-.App-link {
-  color: #09d3ac;
+.logout__p {
+  margin: 15% 0;
+}
+
+.brewerySearchContainer__div {
+  display: flex;
+  align-items: center;
 }
 
 .brewerySearch__link {
   text-decoration: none;
-  color: inherit;
-  border: 1px solid rgba(255, 255, 255, .8);
-  padding: 5px;
-  border-radius: 2px;
+  background-color: #f8f8f8;
+  border: 1px solid #c0c0c0;
+  padding: 7px;
+  border-radius: 0 5px 5px 0;
 }
 
-.brewerySearch__li {
-  margin-top: 6px;
+.searchBreweryLink__container {
+  color: #e3b04b;
 }
 
-.brewerySearch__li :hover {
-  color: #282c34;
-  background-color: rgba(255, 255, 255, .8);
+.brewerySearch__link:hover {
+  color: #2b2b28;
+  cursor: pointer;
+  background-color: #f1d6ab;
 }
 
 .brewerySearch__input {
+  border: 0.5px solid #c0c0c0;
+  border-radius: 5px 0 0 5px;
+  font-family: inherit;
   height: 100%;
+  outline: none;
+  padding: 10px;
 }
-

@@ -43,7 +43,7 @@ function EditItinerary(props) {
                 <label htmlFor="state">State </label>
                 <input type="text" name="state" id="state" defaultValue={props.currentItinerary.state} onChange={handleInputChange} />
             </div>
-            <button onClick={() => saveChanges()}>Save Changes</button>
+            <button className="button" onClick={() => saveChanges()}>Save Changes</button>
         </section>
     )
 }

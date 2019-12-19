@@ -36,7 +36,7 @@ function AddBrewery(props) {
                     options={options}
                 />
             }
-            <button onClick={addBrewery}>Add Brewery</button>
+            <button className="button" onClick={addBrewery}>Add Brewery</button>
         </section>
     )
 }
