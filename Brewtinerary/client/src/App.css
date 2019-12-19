@@ -13,6 +13,7 @@
   padding: 0 20px;
 }
 
+
 .nav-items {
   list-style: none;
   display: flex;
@@ -33,6 +34,10 @@
   color: #f1d6ab;
 }
 
+.logout__p {
+  margin: 15% 0;
+}
+
 .brewerySearchContainer__div {
   display: flex;
   align-items: center;
@@ -40,10 +45,14 @@
 
 .brewerySearch__link {
   text-decoration: none;
-  color: inherit;
-  border: 1px solid #f8f8f8;
-  padding: 5px;
-  border-radius: 2px;
+  background-color: #f8f8f8;
+  border: 1px solid #c0c0c0;
+  padding: 7px;
+  border-radius: 0 5px 5px 0;
+}
+
+.searchBreweryLink__container {
+  color: #e3b04b;
 }
 
 .brewerySearch__link:hover {
@@ -54,7 +63,7 @@
 
 .brewerySearch__input {
   border: 0.5px solid #c0c0c0;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   font-family: inherit;
   height: 100%;
   outline: none;

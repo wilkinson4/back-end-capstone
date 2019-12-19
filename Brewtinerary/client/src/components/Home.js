@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ItineraryManager from '../API/itineraryManager';
 import ItineraryCard from './Itineraries/ItineraryCard';
-import "./css/Home.css";
 
 class Home extends Component {
   state = {
@@ -21,7 +20,7 @@ class Home extends Component {
     return (
       <>
         <h1>My Itineraries</h1>
-        <button className="button" onClick={() => this.props.history.push("/itineraries/create")}>Create Itinerary</button>
+        <button className="button btn-primary" onClick={() => this.props.history.push("/itineraries/create")}>Create Itinerary</button>
         {
           this.props.itineraries.map(itinerary => {
             return (

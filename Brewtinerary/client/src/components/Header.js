@@ -56,7 +56,7 @@ function Header(props) {
                   </div>
                 </div>
               </li>
-              <li className="nav-item" onClick={props.logout}>Log out</li>
+              <li className="nav-item" onClick={props.logout}><p className="logout__p">Log out</p></li>
             </>
           ) : (
               <>
