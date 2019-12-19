@@ -106,7 +106,11 @@ namespace Capstone
             services.AddHttpClient("openBreweryDb", c =>
             {
                 c.BaseAddress = new Uri("https://api.openbrewerydb.org/breweries/");
-                // Github API versioning
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddHttpClient("Geocoding", c =>
+            {
+                c.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/geocode/");
                 c.DefaultRequestHeaders.Add("Accept", "application/json");
             });
         }
