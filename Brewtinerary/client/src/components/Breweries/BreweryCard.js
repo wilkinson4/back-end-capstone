@@ -20,7 +20,7 @@ function BreweryCard(props) {
                     </button>
             </div>
             <div className="cardBody__div">
-                <p>{props.brewery.street}, {props.brewery.city}, {props.brewery.state}, {props.brewery.postal_code}</p>
+                <p>{props.brewery.street}, {props.brewery.city}, {props.brewery.state}, {props.brewery.postal_Code}</p>
                 <p>{props.brewery.phone}</p>
                 {
                     props.brewery.website_url !== "" &&

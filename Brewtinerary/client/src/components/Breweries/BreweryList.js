@@ -23,7 +23,7 @@ function BreweryList(props) {
                 {
                     breweries.map(b => {
                         // Don't render a brewery card for breweries that have a brewery_type of "planning"
-                        return b.brewery_type !== "planning" &&
+                        return b.brewery_Type !== "planning" &&
                             <li>
                                 <BreweryCard {...props}
                                     brewery={b}
