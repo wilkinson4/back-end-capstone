@@ -66,6 +66,7 @@ namespace Capstone.Controllers.V1
         public async Task<IActionResult> AddBrewery([FromRoute]int itineraryId, [FromBody] BreweryCreateViewModel bcvm)
         {
             geocodeKey = Configuration["Geocode:Key"];
+            var brewery = new Brewery();
             if (bcvm.Latitude == null || bcvm.Longitude == null)
             {
                 var geocodeRequest = new HttpRequestMessage(HttpMethod.Get, $"json?address=500+Interstate+Blvd+S,{bcvm.City},{bcvm.State}&key={geocodeKey}");
@@ -78,24 +79,22 @@ namespace Capstone.Controllers.V1
             }
             else
             {
-                var brewery = new Brewery()
-                {
-                    Name = bcvm.Name,
-                    Brewery_Type = bcvm.Brewery_Type,
-                    Street = bcvm.Street,
-                    City = bcvm.City,
-                    State = bcvm.State,
-                    Postal_Code = bcvm.Postal_Code,
-                    Longitude = bcvm.Longitude,
-                    Latitude = bcvm.Latitude,
-                    Phone = bcvm.Phone,
-                    Website_URL = bcvm.Website_URL
-                };
-            }
 
-            _context.Breweries.Add(brewery);
-            //Save the brewery to the database
-            await _context.SaveChangesAsync();
+                brewery.Name = bcvm.Name;
+                brewery.Brewery_Type = bcvm.Brewery_Type;
+                brewery.Street = bcvm.Street;
+                brewery.City = bcvm.City;
+                brewery.State = bcvm.State;
+                brewery.Postal_Code = bcvm.Postal_Code;
+                brewery.Longitude = bcvm.Longitude;
+                brewery.Latitude = bcvm.Latitude;
+                brewery.Phone = bcvm.Phone;
+                brewery.Website_URL = bcvm.Website_URL;
+
+                _context.Breweries.Add(brewery);
+                //Save the brewery to the database
+                await _context.SaveChangesAsync();
+            }
 
             //Get the newly created brewery back from the DB
             var recentlyCreatedBrewery = _context.Breweries.FirstOrDefault(b => b.Name == brewery.Name);
