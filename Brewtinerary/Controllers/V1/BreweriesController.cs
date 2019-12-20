@@ -1,5 +1,6 @@
 ﻿using Capstone.Data;
 using Capstone.Models.Data;
+using Capstone.Models.Data.GeoCoding;
 using Capstone.Models.ViewModels;
 using Capstone.Routes.V1;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using static Capstone.Routes.V1.Api;
 
 namespace Capstone.Controllers.V1
 {
@@ -69,12 +69,29 @@ namespace Capstone.Controllers.V1
             var brewery = new Brewery();
             if (bcvm.Latitude == null || bcvm.Longitude == null)
             {
-                var geocodeRequest = new HttpRequestMessage(HttpMethod.Get, $"json?address=500+Interstate+Blvd+S,{bcvm.City},{bcvm.State}&key={geocodeKey}");
+                var geocodeRequest = new HttpRequestMessage(HttpMethod.Get, $"json?address={bcvm.Street.Replace(" ", "+")},{bcvm.City},{bcvm.State}&key={geocodeKey}");
                 var geocodeClient = _clientFactory.CreateClient("Geocoding");
 
                 var geocodeResponse = await geocodeClient.SendAsync(geocodeRequest);
 
                 var geocodeAsString = await geocodeResponse.Content.ReadAsStringAsync();
+
+                var deserializedGeoCoding = JsonConvert.DeserializeObject<GeocodeResult>(geocodeAsString);
+
+                brewery.Name = bcvm.Name;
+                brewery.Brewery_Type = bcvm.Brewery_Type;
+                brewery.Street = bcvm.Street;
+                brewery.City = bcvm.City;
+                brewery.State = bcvm.State;
+                brewery.Postal_Code = bcvm.Postal_Code;
+                brewery.Longitude = deserializedGeoCoding.Results[0].Geometry.Location.Lng;
+                brewery.Latitude = deserializedGeoCoding.Results[0].Geometry.Location.Lat;
+                brewery.Phone = bcvm.Phone;
+                brewery.Website_URL = bcvm.Website_URL;
+
+                _context.Breweries.Add(brewery);
+                //Save the brewery to the database
+                await _context.SaveChangesAsync();
 
             }
             else
