@@ -1,10 +1,13 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import ItineraryManager from '../../API/itineraryManager';
 import AddedBreweryCard from '../Breweries/AddedBreweryCard';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
 
 function ItineraryDetails(props) {
+    const [showInfoWindow, updateShowInfoWindow] = useState(false)
+    
     const { itineraryId } = useParams();
 
     const history = useHistory();
