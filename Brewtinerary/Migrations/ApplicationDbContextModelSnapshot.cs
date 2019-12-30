@@ -120,7 +120,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c89ab8c8-41bd-45a5-b6b2-1b80f2433db7",
+                            ConcurrencyStamp = "88ebd76b-36e1-47da-a09e-18de1b9a8f9f",
                             Email = "andy@andy.com",
                             EmailConfirmed = true,
                             FirstName = "Andy",
@@ -128,7 +128,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANDY@ANDY.COM",
                             NormalizedUserName = "ANDY123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAN2uMVxOI7KD12vCYobrM/6DzjTNe2TEPiQlKGcqP0dAjQnghxLNkKVBknyWyla+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECMx43moZyTMIzc01WIybocwq069YQPn4Gnh/xJ7p1MEywqCFsyj5BHWYExMnqPXrQ==",
                             PhoneNumber = "610-123-4567",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
@@ -139,7 +139,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-fffffffff123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ee66c45-2cc7-4d13-bb98-e92d875b8b6b",
+                            ConcurrencyStamp = "a789a123-ac82-43a5-8543-98bf868994ac",
                             Email = "jenny@jenny.com",
                             EmailConfirmed = true,
                             FirstName = "Jenny",
@@ -147,7 +147,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JENNY@JENNY.COM",
                             NormalizedUserName = "JENNY123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJWGe7Ox2HS58nt/pjioVhtu5lpQ3t4JeVJkcwcNcAkOGoDWC14VTp9mgznxca63cw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFu1jThSKwNaRUWiE2rWtrtIqp2Yt+P3Sxo3M7FY1hw8tsnd8jj8l88w6Kr2jroKHw==",
                             PhoneNumber = "610-989-4567",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794123",
@@ -198,6 +198,9 @@ namespace Capstone.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ItineraryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Latitude")
                         .HasColumnType("nvarchar(max)");
 
@@ -227,6 +230,8 @@ namespace Capstone.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItineraryId");
 
                     b.ToTable("Breweries");
                 });
@@ -405,28 +410,6 @@ namespace Capstone.Migrations
                     b.ToTable("UserComments");
                 });
 
-            modelBuilder.Entity("Capstone.Models.ViewModels.ItineraryBreweryViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BreweryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItineraryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BreweryId");
-
-                    b.HasIndex("ItineraryId");
-
-                    b.ToTable("ItineraryBreweryViewModel");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -587,6 +570,13 @@ namespace Capstone.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Capstone.Models.Data.Brewery", b =>
+                {
+                    b.HasOne("Capstone.Models.Data.Itinerary", null)
+                        .WithMany("Breweries")
+                        .HasForeignKey("ItineraryId");
+                });
+
             modelBuilder.Entity("Capstone.Models.Data.ItineraryBrewery", b =>
                 {
                     b.HasOne("Capstone.Models.Data.Brewery", "Brewery")
@@ -636,21 +626,6 @@ namespace Capstone.Migrations
                         .WithMany("UserComments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Capstone.Models.ViewModels.ItineraryBreweryViewModel", b =>
-                {
-                    b.HasOne("Capstone.Models.Data.Brewery", "Brewery")
-                        .WithMany()
-                        .HasForeignKey("BreweryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Capstone.Models.Data.Itinerary", null)
-                        .WithMany("ItineraryBreweryViewModels")
-                        .HasForeignKey("ItineraryId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

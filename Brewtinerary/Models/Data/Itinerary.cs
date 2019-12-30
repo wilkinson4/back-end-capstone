@@ -34,8 +34,10 @@ namespace Capstone.Models.Data
         [Required]
         public string State { get; set; }
 
+        [NotMapped]
         public virtual ICollection<ItineraryBrewery> ItineraryBreweries { get; set; }
 
-        public List<ItineraryBreweryViewModel> ItineraryBreweryViewModels { get; set; }
+        public List<Brewery> Breweries { get; set; }
+
     }
 }

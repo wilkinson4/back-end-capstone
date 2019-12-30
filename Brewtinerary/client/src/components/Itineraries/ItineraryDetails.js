@@ -2,8 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import ItineraryManager from '../../API/itineraryManager';
 import AddedBreweryCard from '../Breweries/AddedBreweryCard';
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-
+import MapContainer from '../GoogleMaps/MapContainer';
 
 function ItineraryDetails(props) {
     const [showInfoWindow, updateShowInfoWindow] = useState(false)
@@ -34,15 +33,18 @@ function ItineraryDetails(props) {
                 <p>{`${props.currentItinerary.city}, ${props.currentItinerary.state}`}</p>
                 <button className="button" onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
             </div>
+            <div className="breweryMap__div">
+                {/* <MapContainer /> */}
+            </div>
             <div className="breweryList__div">
                 <h3>Breweries</h3>
                 {
-                    !!props.currentItinerary.itineraryBreweryViewModels &&
-                    props.currentItinerary.itineraryBreweryViewModels.map(ibvm => {
+                    !!props.currentItinerary.breweries &&
+                    props.currentItinerary.breweries.map(b => {
                         return <AddedBreweryCard
-                            key={ibvm.brewery.id}
+                            key={b.id}
                             {...props}
-                            brewery={ibvm.brewery}
+                            brewery={b}
                         />
                     })
                 }

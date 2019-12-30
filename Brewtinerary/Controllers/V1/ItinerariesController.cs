@@ -49,6 +49,13 @@ namespace Capstone.Controllers.V1
                 return NotFound();
             }
 
+            List<Brewery> breweries = new List<Brewery>();
+
+            foreach (ItineraryBrewery ib in itineraryFromDB.ItineraryBreweries)
+            {
+                breweries.Add(ib.Brewery);
+            }
+
             var itineraryWithoutCycleReference = new Itinerary()
             {
                 Id = itineraryFromDB.Id,
@@ -56,13 +63,7 @@ namespace Capstone.Controllers.V1
                 DateOfEvent = itineraryFromDB.DateOfEvent,
                 City = itineraryFromDB.City,
                 State = itineraryFromDB.State,
-                ItineraryBreweryViewModels = itineraryFromDB.ItineraryBreweries.Select(ib => new ItineraryBreweryViewModel()
-                {
-                    Id = ib.Id,
-                    BreweryId = ib.BreweryId,
-                    ItineraryId = ib.ItineraryId,
-                    Brewery = ib.Brewery
-                }).ToList()
+                Breweries = breweries
             };
 
 
