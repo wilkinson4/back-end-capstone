@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useEffect, useCallback } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import ItineraryManager from '../../API/itineraryManager';
 import AddedBreweryCard from '../Breweries/AddedBreweryCard';
 import MapContainer from '../GoogleMaps/MapContainer';
 
 function ItineraryDetails(props) {
-    const [showInfoWindow, updateShowInfoWindow] = useState(false)
-    
     const { itineraryId } = useParams();
 
     const history = useHistory();
@@ -34,7 +32,13 @@ function ItineraryDetails(props) {
                 <button className="button" onClick={() => history.push(`/itineraries/edit/${itineraryId}`)}>Edit Itinerary</button>
             </div>
             <div className="breweryMap__div">
-                {/* <MapContainer /> */}
+                {
+                    !!props.currentItinerary.breweries &&
+                    <MapContainer
+                        {...props}
+                        breweries={props.currentItinerary.breweries}
+                    />
+                }
             </div>
             <div className="breweryList__div">
                 <h3>Breweries</h3>
